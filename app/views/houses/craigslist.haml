@@ -1,0 +1,23 @@
+.dash-container
+  =link_to 'Duplexes', '#duplex'
+  -@results.each do |result|
+    %h1.collapsible{"data-toggle"=>"collapse", "data-target"=>"##{result[:house_type]}", "aria-expanded"=>"true", "aria-controls"=>"##{result[:house_type]}"}
+      -house_type = result[:house_type] == 'all' ? result[:house_type].capitalize : result[:house_type].capitalize.pluralize
+      =house_type
+    %hr.thick-hr
+    %div.collapse{id:"#{result[:house_type]}"}
+
+      -result[:updates].each do |update|
+        %hr.thick-hr
+        %h3=update[:date].strftime("%b %d %l:%M %P")
+        %h2=link_to "#{update[:city].capitalize} - #{update[:title]}".html_safe, update[:link], target: 'blank'
+        %hr{style:'background-color:black;height:3px'}
+        %p=update[:description].html_safe
+        .gallery
+          -update[:pics].each do |pic|
+            %img{src:pic}
+
+// :javascript
+//   $(window).load(function() {
+//     $('.gallery').jqcarousel();
+//   });
