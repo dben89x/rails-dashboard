@@ -15,6 +15,7 @@ gem 'nokogiri'
 gem 'bootstrap-sass'
 gem 'twitter-bootstrap-rails'
 gem 'rails-jcarousel'
+gem 'figaro'
 
 gem "redd", "~> 0.7"
 gem "oj", platforms: :ruby
