@@ -1,0 +1,22 @@
+.dash-container
+
+	-@states.each do |state|
+		=link_to state.upcase, "?state=#{state}&sort_by=#{params[:sort_by]}"
+
+	%br
+	%br
+
+	-@sort_by_options.each do |sort_by|
+		=link_to "Sort by #{sort_by}", "?state=#{params[:state]}&sort_by=#{sort_by}", style: 'border: 1px solid black; border-radius:6px; margin:5px; padding:5px 10px; text-decoration:none'
+
+	-@updates.each do |update|
+		%hr.thick-hr
+		%h2
+			="$#{update[:price]} | "
+			=link_to update[:link], target: 'blank' do
+				="#{update[:city].capitalize} - #{update[:title]}"
+		%h3=update[:date]
+
+		.gallery
+			-update[:pics].each do |pic|
+				%img{src:pic}

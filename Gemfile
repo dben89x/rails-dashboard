@@ -1,15 +1,15 @@
 source 'https://rubygems.org'
 
-gem 'rails', '4.2.5'
+gem 'rails', '5.0'
 gem 'pg'
-gem 'sass-rails', '~> 5.0'
-gem 'uglifier', '>= 1.3.0'
-gem 'coffee-rails', '~> 4.1.0'
+gem 'sass-rails'
+gem 'uglifier'
+gem 'coffee-rails'
 gem 'libxml-ruby'
 gem 'jquery-rails'
 gem 'turbolinks'
-gem 'jbuilder', '~> 2.0'
-gem 'sdoc', '~> 0.4.0', group: :doc
+gem 'jbuilder'
+gem 'sdoc'
 gem 'haml'
 gem 'nokogiri'
 gem 'bootstrap-sass'
@@ -17,16 +17,16 @@ gem 'twitter-bootstrap-rails'
 gem 'rails-jcarousel'
 gem 'figaro'
 
-gem "redd", "~> 0.7"
+gem "redd"
 gem "oj", platforms: :ruby
 
 
 group :development, :test do
-  gem 'byebug'
+	gem 'byebug'
 end
 
 group :development do
-  gem 'web-console', '~> 2.0'
+	gem 'web-console'
 
-  gem 'spring'
+	gem 'spring'
 end
