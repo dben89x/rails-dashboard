@@ -21,11 +21,16 @@ class VansController < ApplicationController
 		@days_ago = params[:days_ago].blank? ? 1 : params[:days_ago]
 
 		cities.each do |city|
-			url = "https://#{city}.craigslist.org/search/cto?hasPic=1&auto_bodytype=12"
-			@page = Nokogiri::HTML(open(url))
-			@rows = @page.css('body section.page-container form#searchform div.content ul.rows li.result-row')
-			@data_ids = @rows.css('a.result-image').to_a
-			populate_updates(@rows, @data_ids, city)
+			urls = [
+				"https://#{city}.craigslist.org/search/cto?hasPic=1&auto_bodytype=12&max_price=5000",
+				"https://#{city}.craigslist.org/search/rvs?hasPic=1&max_price=5000"
+				]
+			urls.each do |url|
+				@page = Nokogiri::HTML(open(url))
+				@rows = @page.css('body section.page-container form#searchform div.content ul.rows li.result-row')
+				@data_ids = @rows.css('a.result-image').to_a
+				populate_updates(@rows, @data_ids, city)
+			end
 		end
 
 		@updates = @updates.uniq {|u| u[:title]}
