@@ -7,9 +7,9 @@ class VansController < ApplicationController
 		@states = %w(az ca co nm ut)
 		@sort_by_options = %w(price date city)
 
-		az_cities = %w(boulder cosprings denver eastco fortcollins rockies pueblo westslope)
+		az_cities = %w(phoenix flagstaff prescott showlow sierravista tucson yuma mohave)
 		ca_cities = %w(bakersfield chico fresno goldcountry hanford humboldt imperial inlandempire losangeles mendocino merced modesto monterey orangecounty palmsprings redding reno sacramento sandiego slo santabarbara santamaria sfbay siskiyou stockton susanville ventura visalia yubasutter)
-		co_cities = %w(phoenix flagstaff prescott showlow sierravista tucson yuma mohave)
+		co_cities = %w(boulder cosprings denver eastco fortcollins rockies pueblo westslope)
 		nm_cities = %w(albuquerque clovis farmington lascruces roswell santafe)
 		ut_cities = %w(logan ogden provo saltlakecity stgeorge)
 
@@ -36,7 +36,7 @@ class VansController < ApplicationController
 		else
 			@updates.sort_by {|u| u[ :datetime ]}.reverse
 		end
-		
+
 	end
 
 	def populate_updates(rows, data_ids, city)
