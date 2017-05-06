@@ -1,4 +1,3 @@
-require 'rss'
 require 'open-uri'
 require 'nokogiri'
 
@@ -24,15 +23,20 @@ class VansController < ApplicationController
 		cities.each do |city|
 			url = "https://#{city}.craigslist.org/search/cto?hasPic=1&auto_bodytype=12"
 			@page = Nokogiri::HTML(open(url))
-			@feed = get_feed(url)
-			@items = @feed.present? ? @feed.items : []
 			@rows = @page.css('body section.page-container form#searchform div.content ul.rows li.result-row')
 			@data_ids = @rows.css('a.result-image').to_a
 			populate_updates(@rows, @data_ids, city)
 		end
 
 		@updates = @updates.uniq {|u| u[:title]}
-		@updates = params[:sort_by] == 'date' ? @updates.sort_by {|u| u[ :datetime ]}.reverse : @updates.sort_by {|u| u[ params[:sort_by].to_sym ]}
+
+		@updates = case params[:sort_by]
+		when "price", "city"
+			@updates.sort_by {|u| u[ params[:sort_by].to_sym ]}
+		else
+			@updates.sort_by {|u| u[ :datetime ]}.reverse
+		end
+		
 	end
 
 	def populate_updates(rows, data_ids, city)
